@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Glyphicon } from 'react-bootstrap';
 import store from '../store';
 import {addToCart} from '../actionCreators';
 
 const styles = {
   products: {
-    display: 'flex',
-    alignItems: 'stretch',
-    flexWrap: 'wrap'
+    width: '350px'
   },
   product: {
     width: '220px',
@@ -32,19 +29,24 @@ class ProductList extends Component {
 
   render() {
     return (
-      <div style={styles.products}>
-        {this.state.products.map(product =>
-          <div className="thumbnail" style={styles.product} key={product.id}>
-            <img src={product.image} alt={product.name} />
-            <div className="caption">
-              <h4>{product.name}</h4>
-              <p>
-                <Button bsStyle="primary" onClick={() => this.addToCart(product)} role="button" disabled={product.inventory <= 0}>${product.price} <Glyphicon glyph="shopping-cart" /></Button>
+      <div className="card-group">
+      
+      {this.state.products.map(product =>
+          <div  key={product.id}>
+            <img className="card-img-top" src={product.image} alt={product.name} />
+            <div className="card-body">
+              <h4 className="card-title">{product.name}</h4>
+              <p className="card-text">
+                <a className="btn btn-primary" onClick={() => this.addToCart(product)}  disabled={product.inventory <= 0}>${product.price} </a>
               </p>
             </div>
           </div>
         )}
-      </div>
+  
+
+</div>
+
+
     );
   }
 
